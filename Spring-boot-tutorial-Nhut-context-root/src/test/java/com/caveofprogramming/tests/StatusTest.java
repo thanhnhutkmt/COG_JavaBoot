@@ -35,6 +35,7 @@ public class StatusTest {
 	public void testDummy() {
 		Long value = 7L;
 		assertNotNull("Value should not be null", value);
+		
 	}
 	
 	@Autowired
