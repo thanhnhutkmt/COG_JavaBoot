@@ -17,6 +17,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+import java.util.Calendar;
+
 import javax.transaction.Transactional;
 
 import org.junit.Assert;
@@ -51,5 +53,20 @@ public class StatusTest {
 		StatusUpdate retrieved = statusUpdateDao.findOne(status.getId());
 		assertEquals("Matching StatusUpdate", status, retrieved);
 		
+	}
+	
+	@Test
+	public void testFindLatest() {
+		Calendar calendar = Calendar.getInstance();
+		StatusUpdate lastStatusUpdate = null;
+		for (int i = 0; i < 10; i++) {
+			calendar.add(Calendar.DAY_OF_YEAR, 1);
+			StatusUpdate status = new StatusUpdate("Status update " + i, calendar.getTime());
+			statusUpdateDao.save(status);
+			lastStatusUpdate = status;
+		}
+		StatusUpdate retrieved = statusUpdateDao.findFirstByOrderByAddedDesc();
+		System.out.println("Latest status update \n" +  lastStatusUpdate + "\n" + retrieved);
+		assertEquals("Latest status update",  lastStatusUpdate, retrieved);
 	}
 }

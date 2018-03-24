@@ -14,6 +14,8 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * @author nhut
@@ -27,6 +29,7 @@ public class StatusUpdate {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
+	@Size(min=5, max=255, message="{addstatus.text.size}")
 	@Column(name="text")
 	private String text;
 	
@@ -53,6 +56,8 @@ public class StatusUpdate {
 	public StatusUpdate() {
 		
 	}
+	
+	
 
 	public Long getId() {
 		return id;
@@ -106,6 +111,11 @@ public class StatusUpdate {
 		} else if (!text.equals(other.text))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "StatusUpdate [id=" + id + ", text=" + text + ", added=" + added + "]";
 	}
 	
 	
