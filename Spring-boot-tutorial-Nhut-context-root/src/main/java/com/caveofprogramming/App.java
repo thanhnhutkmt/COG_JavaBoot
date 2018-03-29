@@ -13,7 +13,7 @@ import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesView;
 
 /**
- * @author nhut
+ * @author Thanh Nhut
  *
  */
 @SpringBootApplication
