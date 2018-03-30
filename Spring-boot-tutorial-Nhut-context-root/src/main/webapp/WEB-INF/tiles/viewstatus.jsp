@@ -19,7 +19,7 @@
 					</div>
 				</div>
 				<div class="panel-body">
-					<c:out value="${statusUpdate.text}" />
+					${statusUpdate.text}
 				</div>
 			</div>
 		</c:forEach>

@@ -31,78 +31,16 @@ public class PageController {
 	private StatusUpdateService statusUpdateService;
 	
 	@RequestMapping("/")	
-	public String home() {
-		return "app.homepage";
+	public ModelAndView home(ModelAndView modelAndView) {
+		StatusUpdate statusUpdate = statusUpdateService.getLatest();
+		modelAndView.getModel().put("statusUpdate", statusUpdate);
+		modelAndView.setViewName("app.homepage");
+		
+		return modelAndView;
 	}
 	
 	@RequestMapping("/about")
 	String about() {
 		return "app.about";
-	}
-	
-//	@RequestMapping(value="/addstatus", method=RequestMethod.GET)
-//	ModelAndView addStatus(ModelAndView modelAndView) {
-//		
-//		modelAndView.setViewName("app.addStatus");
-//		StatusUpdate statusUpdate = new StatusUpdate("Hello from the model", new Date());
-//		StatusUpdate latestStatusUpdate = statusUpdateService.getLatest();
-//		
-//		modelAndView.getModel().put("statusUpdate", statusUpdate);
-//		modelAndView.getModel().put("latestStatusUpdate", latestStatusUpdate);
-//		
-//		return modelAndView;
-//	}
-	
-	@RequestMapping(value="/addstatus", method=RequestMethod.GET)
-	ModelAndView addStatus(ModelAndView modelAndView, 
-		@ModelAttribute("statusUpdate") StatusUpdate statusUpdate) {	
-		
-		modelAndView.setViewName("app.addStatus");
-		StatusUpdate latestStatusUpdate = statusUpdateService.getLatest();
-		modelAndView.getModel().put("latestStatusUpdate", latestStatusUpdate);
-		
-		return modelAndView;
-	}
-	
-//	@RequestMapping(value="/addstatus", method=RequestMethod.POST)
-//	ModelAndView addStatus(ModelAndView modelAndView, 
-//			@Valid StatusUpdate statusUpdate, BindingResult result) {	
-//		modelAndView.setViewName("app.addStatus");
-//		
-//		if (!result.hasErrors()) {
-//			statusUpdateService.save(statusUpdate);
-//			modelAndView.getModel().put("statusUpdate", new StatusUpdate());
-//		}
-//
-//		StatusUpdate latestStatusUpdate = statusUpdateService.getLatest();
-//		modelAndView.getModel().put("latestStatusUpdate", latestStatusUpdate);
-//		
-//		return modelAndView;
-//	}
-	
-	@RequestMapping(value="/viewstatus", method=RequestMethod.GET)
-	ModelAndView viewStatus(ModelAndView modelAndView, 
-			@RequestParam(name="p", defaultValue="1") int pageNumber) {
-//		System.out.println();
-//		System.out.println("=============" + pageNumber + "=============");
-//		System.out.println();
-		
-		Page<StatusUpdate> page = statusUpdateService.getPage(pageNumber);
-		modelAndView.getModel().put("page", page);
-		
-		modelAndView.setViewName("app.viewStatus");
-		return modelAndView;
-	}
-	
-	@RequestMapping(value="/addstatus", method=RequestMethod.POST)
-	ModelAndView addStatus(ModelAndView modelAndView, 
-			@Valid StatusUpdate statusUpdate, BindingResult result) {		
-		if (!result.hasErrors()) {
-			statusUpdateService.save(statusUpdate);
-			modelAndView.getModel().put("statusUpdate", new StatusUpdate());
-		}
-		
-		addStatus(modelAndView, statusUpdate);		
-		return modelAndView;
 	}
 }

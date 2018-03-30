@@ -17,6 +17,9 @@
 
 <link href="${contextRoot}/css/bootstrap.min.css" rel="stylesheet">
 <link href="${contextRoot}/css/main.css" rel="stylesheet">
+
+<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+<script>tinymce.init({ selector:'#mytextarea', plugins:"link" });</script>
 </head>
 <body>
 
@@ -36,11 +39,20 @@
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="${contextRoot}/">Home</a></li>
-				<li><a href="${contextRoot}/viewstatus">View Status</a></li>
+				<%-- <li><a href="${contextRoot}/viewstatus">View Status</a></li> --%>
 				<li><a href="${contextRoot}/about">About</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="${contextRoot}/addstatus">Add Status</a></li>
+				
+				<li class="dropdown">
+	                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+	                	Status <span class="caret"></span>
+	                </a>
+	                <ul class="dropdown-menu">
+	                  <li><a href="${contextRoot}/addstatus">Add Status</a></li>
+	                  <li><a href="${contextRoot}/viewstatus">View Status Updates</a></li>
+	                </ul>
+              	</li>
 			</ul>
 		</div>
 		<!--/.nav-collapse -->
