@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Title: Spring-boot-tutorial-Nhut-context-root
 Implementation-Version: 1.1
-Built-By: nhut
+Built-By: java_dev
 Implementation-Vendor-Id: caveofprogramming.com
-Build-Jdk: 1.8.0_161
+Build-Jdk: 1.8.0_162
 Created-By: Maven Integration for Eclipse
 Implementation-Vendor: Pivotal Software, Inc.
 

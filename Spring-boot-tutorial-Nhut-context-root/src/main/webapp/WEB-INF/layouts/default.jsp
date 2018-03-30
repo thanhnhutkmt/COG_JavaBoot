@@ -36,6 +36,7 @@
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="${contextRoot}/">Home</a></li>
+				<li><a href="${contextRoot}/viewstatus">View Status</a></li>
 				<li><a href="${contextRoot}/about">About</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
