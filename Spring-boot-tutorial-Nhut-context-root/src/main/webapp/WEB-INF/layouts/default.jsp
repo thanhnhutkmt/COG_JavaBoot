@@ -17,9 +17,6 @@
 
 <link href="${contextRoot}/css/bootstrap.min.css" rel="stylesheet">
 <link href="${contextRoot}/css/main.css" rel="stylesheet">
-
-<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
-<script>tinymce.init({ selector:'#mytextarea', plugins:"link" });</script>
 </head>
 <body>
 
@@ -60,8 +57,75 @@
 	</nav>
 	<div class="container">
 		<tiles:insertAttribute name="content" />
-	</div>
+	</div>	
 	<script src="${contextRoot}/js/jquery.min.js"></script>
  	<script src="${contextRoot}/js/bootstrap.min.js"></script>
+ 	
+<!-- TINYMCE editor with trial apikey --> 
+  	<script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=wzaoq2ifu65zy8gk3xsnsvt3u0noskebsm763krln9eluvqn"></script>
+	<script>
+	tinymce.init({
+		  selector: '#tinyMCEtextarea',
+		  plugins: 'print preview fullpage powerpaste searchreplace autolink directionality advcode visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount tinymcespellchecker a11ychecker imagetools mediaembed  linkchecker contextmenu colorpicker textpattern help',
+		  toolbar: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat'
+		 });
+	</script>
+<!-- TINYMCE editor --> 
+	
+<!-- froala editor --> 	
+	<link rel="stylesheet" href="${contextRoot}/css/froala_editor.pkgd.min.css">	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" />	  	
+  	<script type="text/javascript" src="${contextRoot}/js/froala_editor.pkgd.min.js"></script> 	   	
+	<script>
+	   $(function() {
+	    $('textarea#froala-editor').froalaEditor({
+	      toolbarButtons: ['fullscreen', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 
+	    	  'superscript', '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', 
+	    	  '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', 
+	    	  '-', 'insertLink', 'insertImage', 'insertVideo', 'insertFile', 'insertTable', '|', 'emoticons', 
+	    	  'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'print', 'help', 
+	    	  'html', '|', 'undo', 'redo'] 	  
+	    })
+	  });   
+	</script>
+<!-- froala editor --> 
+
+<!-- quill editor --> 
+	<link href="https://cdn.quilljs.com/1.1.6/quill.snow.css" rel="stylesheet">	
+	<script src="https://cdn.quilljs.com/1.1.6/quill.js"></script>
+	<script> 
+		var toolbarOptions = [
+		  ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+		  ['blockquote', 'code-block'],
+	
+		  [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+		  [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+		  [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+		  [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+		  [{ 'direction': 'rtl' }],                         // text direction
+	
+		  [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+		  [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+	
+		  [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+		  [{ 'font': [] }],
+		  [{ 'align': [] }],	  
+		];
+	
+ 		var quill = new Quill('#quilleditor', {
+		  modules: {
+		    toolbar: toolbarOptions
+		  },
+		  theme: 'snow'
+		}); 
+	</script>
+<!-- quill editor --> 
+
+<!-- nicEditor editor --> 
+	<script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script> 
+	<script type="text/javascript">
+	   bkLib.onDomLoaded(function() {new nicEditor({fullPanel : true}).panelInstance('nicEdit-textarea');});
+	</script>
+<!-- nicEditor editor --> 
 </body>
 </html>

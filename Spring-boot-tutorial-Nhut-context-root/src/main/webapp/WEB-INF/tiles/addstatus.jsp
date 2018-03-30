@@ -21,7 +21,7 @@
 							<form:errors path="text"/>
 						</div>
 						<div class="form-group"> 
-							<form:textarea id="mytextarea" path="text" name="text" rows="id" cols="50"></form:textarea>
+							<form:textarea id="tinyMCEtextarea" path="text" name="text" rows="id" cols="50"></form:textarea>
 						</div>
 						<input type="submit" name="submit" value="Add status" />
 					</form:form>
