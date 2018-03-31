@@ -42,10 +42,13 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<sec:authorize access="!isAuthenticated()">
-					<li><a href="${contextRoot}/login">Login</a></li>
+					<li><a href="${contextRoot}/login">Login</a></li>				
+					<li><a href="${contextRoot}/register">Register</a></li>
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
 					<li><a href="javascript:$('#logoutForm').submit();">Logout</a></li>
+				</sec:authorize>
+				<sec:authorize access="hasRole('ROLE_ADMIN')">
 					<li class="dropdown">
 		                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 		                	Status <span class="caret"></span>

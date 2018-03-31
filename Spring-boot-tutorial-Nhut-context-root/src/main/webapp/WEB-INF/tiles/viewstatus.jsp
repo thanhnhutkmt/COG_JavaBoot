@@ -24,7 +24,7 @@
 				<div class="panel-body">
 					<div>${statusUpdate.text}</div>
 					<div class="edit-links pull-right">												
-						<button class="btn btn-large btn-primary" data-toggle="confirmation" href="${editLink}" >Edit</button>
+						<button class="btn btn-large btn-primary" onclick="window.location.href='${editLink}'" >Edit</button>
 						 
  						<button class="btn btn-large btn-primary" data-toggle="confirmation"
 						        data-btn-ok-label="Yes" data-btn-ok-icon="glyphicon glyphicon-share-alt"

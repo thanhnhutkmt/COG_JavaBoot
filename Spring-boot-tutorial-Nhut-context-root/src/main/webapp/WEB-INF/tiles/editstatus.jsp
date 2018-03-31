@@ -21,6 +21,7 @@
 							<form:textarea id="tinyMCEtextarea" path="text" name="text" rows="id" cols="50"></form:textarea>
 						</div>
 						<input type="submit" name="submit" value="Save status" />
+						<input type="button" onclick="history.go(-1);" value="Cancel" />
 					</form:form>
 				</div>
 			</div>
