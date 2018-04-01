@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.caveofprogramming.model.SiteUser;
+import com.caveofprogramming.service.EmailService;
 import com.caveofprogramming.service.UserService;
 
 /**
@@ -25,11 +26,19 @@ public class AuthController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private EmailService emailService;
+	
 	@RequestMapping("/login")
 	String login() {
 		return "app.login";	
 	}
-		
+	
+	@RequestMapping("/verifyemail")
+	String verifyemail() {
+		return "app.verifyemail";	
+	}
+	
 	@RequestMapping(value="/register", method=RequestMethod.GET)
 	ModelAndView register(ModelAndView modelAndView) {
 		SiteUser user = new SiteUser();
@@ -43,11 +52,11 @@ public class AuthController {
 	ModelAndView register(ModelAndView modelAndView, 
 			@ModelAttribute(value="user") @Valid SiteUser user, BindingResult result) {			
 		modelAndView.setViewName("app.register");
-		if (!result.hasErrors()) {
+		if (!result.hasErrors()) {			
 			userService.register(user);
-			modelAndView.setViewName("redirect:/");	
-		}
-		
+			emailService.sendVerificationEmail(user.getEmail());
+			modelAndView.setViewName("redirect:/verifyemail");	
+		}		
 		return modelAndView;
 	}
 }

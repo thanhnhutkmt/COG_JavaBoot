@@ -1,0 +1,9 @@
+<html>
+<body>
+
+<p> Thank for registering Spring Boot tutorial </p>
+<p>${test}</p>
+<p>Please click <a href="#">here</a> to verify your email address.
+
+</body>
+</html>
