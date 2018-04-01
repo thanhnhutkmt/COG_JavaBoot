@@ -8,8 +8,9 @@
 
 <div class="row">
 	<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-		<form:errors path="email" />
-		<form:errors path="password" />
+		<div class="login-error">
+			<form:errors path="user.*" />			
+		</div>
 			
 		<div class="panel panel-default">			
 			<div class="panel-heading">
@@ -21,10 +22,10 @@
 						<form:input type="text" path="email" placeholder="Email" class="form-control"/>
 					</div>
 					<div class="input-group">
-						<form:input type="password" path="password" placeholder="Password" class="form-control"/>
+						<form:input type="password" path="plainPassword" placeholder="Password" class="form-control"/>
 					</div>
 					<div class="input-group">
-						<input type="password" name="repeatpassword" 
+						<form:input type="password" path="repeatPassword" name="repeatpassword" 
 									placeholder="Repeat password" class="form-control"/>
 					</div>
 					<div class="input-group">
