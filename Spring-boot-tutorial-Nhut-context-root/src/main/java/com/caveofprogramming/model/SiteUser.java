@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.MapKey;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
@@ -18,6 +19,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.caveofprogramming.validation.PasswordMatch;
+import com.caveofprogramming.validation.UniqueCheck;
 
 /**
  * @author java_dev
@@ -25,7 +27,7 @@ import com.caveofprogramming.validation.PasswordMatch;
  */
 @Entity
 @Table(name="users")
-//@PasswordMatch
+@PasswordMatch
 public class SiteUser {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -33,6 +35,7 @@ public class SiteUser {
 	private Long id;
 	
 	@Column(name="email", unique=true, nullable=false)
+	@UniqueCheck(message="This email address already exists")
 	@Email(message="{register.email.invalid}")
 	@NotBlank(message="{register.email.invalid}")
 	private String email;
@@ -45,6 +48,14 @@ public class SiteUser {
 	
 	@Column(name="enabled")
 	private Boolean enabled = false;
+
+	@Transient
+	@Size(min=5, max=15, message="{register.password.size}")
+	private String plainPassword;
+	
+	@Column(name="role", length=20)
+	private String role;
+
 	
 	public Boolean getEnabled() {
 		return enabled;
@@ -53,13 +64,6 @@ public class SiteUser {
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
-
-	@Transient
-	@Size(min=5, max=15, message="{register.password.size}")
-	private String plainPassword;
-	
-	@Column(name="role", length=20)
-	private String role;
 	
 	public Long getId() {
 		return id;

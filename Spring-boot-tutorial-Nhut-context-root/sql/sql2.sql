@@ -10,9 +10,11 @@ show tables;
 desc users;
 desc verification;
 insert into users(email, password) values ('Nhut@ttc.com', 'hello');
+insert into users(email, password) values ('seafec2014@gmail.com', 'hello');
 select * from users;
 select length(password) from users;
 
 ALTER TABLE `users` ADD UNIQUE `unique_index`(`email`);
 
 select * from verification;
+select * from status_update;

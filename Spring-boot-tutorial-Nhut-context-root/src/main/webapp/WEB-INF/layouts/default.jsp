@@ -16,8 +16,9 @@
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
-<link href="${contextRoot}/css/bootstrap.min.css" rel="stylesheet">
-<link href="${contextRoot}/css/main.css" rel="stylesheet">
+<link href="${contextRoot}/css/bootstrap.min.css" rel="stylesheet" />
+<link href="${contextRoot}/css/main.css" rel="stylesheet" />
+
 </head>
 <body>
 
@@ -88,7 +89,7 @@
 <!-- TINYMCE editor --> 
 	
 <!-- froala editor --> 	
-	<link rel="stylesheet" href="${contextRoot}/css/froala_editor.pkgd.min.css">	
+	<link rel="stylesheet" href="${contextRoot}/css/froala_editor.pkgd.min.css" />	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" />	  	
   	<script type="text/javascript" src="${contextRoot}/js/froala_editor.pkgd.min.js"></script> 	   	
 	<script>

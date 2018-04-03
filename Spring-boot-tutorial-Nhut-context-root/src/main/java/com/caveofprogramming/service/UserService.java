@@ -60,8 +60,6 @@ public class UserService implements UserDetailsService {
 		userDao.save(user);
 	}
 	
-	
-	
 	public String createEmailVerificationToken(SiteUser user) {
 		VerificationToken token = new VerificationToken(UUID.randomUUID().toString(), user, TokenType.REGISTRATION);
 		verificationDao.save(token);
@@ -74,5 +72,10 @@ public class UserService implements UserDetailsService {
 
 	public void deleteToken(VerificationToken token) {
 		verificationDao.delete(token);		
+	}
+
+	public SiteUser findByEmail(String email) {
+		// TODO Auto-generated method stub
+		return userDao.findByEmail(email);
 	}
 }
