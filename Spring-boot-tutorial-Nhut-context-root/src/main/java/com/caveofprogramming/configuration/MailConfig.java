@@ -3,7 +3,10 @@
  */
 package com.caveofprogramming.configuration;
 
+import java.util.Properties;
+
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -13,7 +16,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
  * @author java_dev
  *
  */
-@Configuration
+//@Configuration
 public class MailConfig {
 	@Value("${mail.smtp.host}")
 	private String host;
@@ -24,14 +27,13 @@ public class MailConfig {
 	@Value("${mail.smtp.password}")
 	private String password;
 	
-	@Bean
+//	@Bean
 	public JavaMailSender mailSender() {
 		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
 		mailSender.setHost(host);
 		mailSender.setPort(port);
 		mailSender.setUsername(user);
 		mailSender.setPassword(password);
-		
 		return mailSender;
 	}
 }

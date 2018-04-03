@@ -12,6 +12,7 @@ import javax.mail.internet.MimeMessage;
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
@@ -54,6 +55,7 @@ public class EmailService {
 		this.templateEngine = templateEngine;
 	}
 	
+	//for mailtrap.io (free account can not really send email) 
 	public void sendVerificationEmail(String emailAddress) {
 		//thymeleaf
 		Context context = new Context();
@@ -81,4 +83,17 @@ public class EmailService {
 		};
 		send(preparator);
 	}
+	
+	// for gmail (free and can send email indeed)
+    public void sendVerificationEmail1(String emailAddress){	    	
+		Context context = new Context();
+		context.setVariable("name", emailAddress.split("@")[0]);		
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setSubject("Please verify you email address");
+        message.setText(templateEngine.process("verifyemail", context));
+        message.setTo(emailAddress);
+        message.setFrom("no-reply@TTC.com");
+        
+        mailSender.send(message);
+    }
 }

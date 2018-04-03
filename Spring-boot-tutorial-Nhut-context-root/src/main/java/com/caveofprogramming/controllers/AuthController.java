@@ -54,7 +54,7 @@ public class AuthController {
 		modelAndView.setViewName("app.register");
 		if (!result.hasErrors()) {			
 			userService.register(user);
-			emailService.sendVerificationEmail(user.getEmail());
+			emailService.sendVerificationEmail1(user.getEmail());
 			modelAndView.setViewName("redirect:/verifyemail");	
 		}		
 		return modelAndView;
