@@ -16,6 +16,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.velocity.VelocityEngineUtils;
 import org.thymeleaf.TemplateEngine;
@@ -39,6 +40,9 @@ public class EmailService {
 	@Value("${mail.enable}")	
 	private Boolean enable;
 	
+	@Value("${site.url}")	
+	private String url;
+	
 	private void send(MimeMessagePreparator preparator) {
 		if (enable) mailSender.send(preparator);
 	}
@@ -55,11 +59,14 @@ public class EmailService {
 		this.templateEngine = templateEngine;
 	}
 	
+	@Async
 	//for mailtrap.io (free account can not really send email) 
-	public void sendVerificationEmail(String emailAddress) {
+	public void sendVerificationEmail(String emailAddress, String token) {
 		//thymeleaf
 		Context context = new Context();
 		context.setVariable("name", "Bob");
+		context.setVariable("token", token);
+		context.setVariable("url", url);
 		String emailContents = templateEngine.process("verifyemail", context);
 		System.out.println(emailContents);
 		
@@ -84,10 +91,13 @@ public class EmailService {
 		send(preparator);
 	}
 	
+	@Async
 	// for gmail (free and can send email indeed)
-    public void sendVerificationEmail1(String emailAddress){	    	
+    public void sendVerificationEmail1(String emailAddress, String token){	    	
 		Context context = new Context();
-		context.setVariable("name", emailAddress.split("@")[0]);		
+		context.setVariable("name", emailAddress.split("@")[0]);
+		context.setVariable("token", token);
+		context.setVariable("url", url);
         SimpleMailMessage message = new SimpleMailMessage();
         message.setSubject("Please verify you email address");
         message.setText(templateEngine.process("verifyemail", context));

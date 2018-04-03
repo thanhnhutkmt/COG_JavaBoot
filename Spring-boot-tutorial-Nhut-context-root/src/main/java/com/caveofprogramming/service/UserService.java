@@ -4,6 +4,7 @@
 package com.caveofprogramming.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,7 +17,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.caveofprogramming.model.SiteUser;
+import com.caveofprogramming.model.TokenType;
 import com.caveofprogramming.model.UserDao;
+import com.caveofprogramming.model.VerificationDao;
+import com.caveofprogramming.model.VerificationToken;
 
 /**
  * @author java_dev
@@ -29,6 +33,9 @@ public class UserService implements UserDetailsService {
 	
 	@Autowired 
 	private PasswordEncoder passwordEncoder;
+	
+	@Autowired 
+	private VerificationDao verificationDao;
 	
 	public void register(SiteUser user) {
 		user.setRole("ROLE_USER");
@@ -44,7 +51,28 @@ public class UserService implements UserDetailsService {
 		}		
 		List<GrantedAuthority> auth = AuthorityUtils.commaSeparatedStringToAuthorityList(user.getRole());
 		String password = user.getPassword();		
+		Boolean enabled = user.getEnabled();
 		
-		return new User(email, password, auth);
+		return new User(email, password, enabled, true, true, true, auth);
+	}
+
+	public void save(SiteUser user) {
+		userDao.save(user);
+	}
+	
+	
+	
+	public String createEmailVerificationToken(SiteUser user) {
+		VerificationToken token = new VerificationToken(UUID.randomUUID().toString(), user, TokenType.REGISTRATION);
+		verificationDao.save(token);
+		return token.getToken();
+	}
+	
+	public VerificationToken getVerificationToken(String token) {
+		return verificationDao.findByToken(token);
+	}
+
+	public void deleteToken(VerificationToken token) {
+		verificationDao.delete(token);		
 	}
 }

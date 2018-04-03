@@ -34,7 +34,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/", 
 					"/about", 
 					"/register", 
-					"/verifyemail")
+					"/verifyemail",
+					"/confirmregister",
+					"/invaliduser",
+					"/expiredtoken"
+					)
 				.permitAll()
 				.antMatchers(
 					"/js/*", 

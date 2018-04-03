@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
@@ -24,14 +25,14 @@ import com.caveofprogramming.validation.PasswordMatch;
  */
 @Entity
 @Table(name="users")
-@PasswordMatch
+//@PasswordMatch
 public class SiteUser {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id")
 	private Long id;
 	
-	@Column(name="email", unique=true)
+	@Column(name="email", unique=true, nullable=false)
 	@Email(message="{register.email.invalid}")
 	@NotBlank(message="{register.email.invalid}")
 	private String email;
@@ -42,6 +43,17 @@ public class SiteUser {
 	@Transient
 	private String repeatPassword;
 	
+	@Column(name="enabled")
+	private Boolean enabled = false;
+	
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
 	@Transient
 	@Size(min=5, max=15, message="{register.password.size}")
 	private String plainPassword;
