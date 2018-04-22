@@ -8,6 +8,7 @@ import java.util.Date;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -30,6 +31,9 @@ public class PageController {
 	@Autowired
 	private StatusUpdateService statusUpdateService;
 	
+	@Value("${message.error.forbidden}")
+	private String accessDeniedMessage;
+	
 	@RequestMapping("/")	
 	public ModelAndView home(ModelAndView modelAndView) {
 		StatusUpdate statusUpdate = statusUpdateService.getLatest();
@@ -37,6 +41,14 @@ public class PageController {
 		modelAndView.setViewName("app.homepage");
 		
 		return modelAndView;
+	}
+	
+	@RequestMapping("/403")
+	ModelAndView forbidden(ModelAndView modelAndView) {
+		modelAndView.getModel().put("message", accessDeniedMessage);		
+		modelAndView.setViewName("app.message");
+		
+		return modelAndView;	
 	}
 	
 	@RequestMapping("/about")

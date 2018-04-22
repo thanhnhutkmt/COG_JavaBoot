@@ -35,7 +35,7 @@ public class SiteUser {
 	private Long id;
 	
 	@Column(name="email", unique=true, nullable=false)
-	@UniqueCheck(message="This email address already exists")
+//	@UniqueCheck(message="This email address already exists")
 	@Email(message="{register.email.invalid}")
 	@NotBlank(message="{register.email.invalid}")
 	private String email;

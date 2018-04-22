@@ -3,6 +3,7 @@
  */
 package com.caveofprogramming.controllers;
 
+import java.io.FileNotFoundException;
 import java.util.Date;
 
 import javax.validation.Valid;
@@ -103,7 +104,7 @@ public class AuthController {
 	}
 	
 	@RequestMapping(value="/register", method=RequestMethod.GET)
-	ModelAndView register(ModelAndView modelAndView) {
+	ModelAndView register(ModelAndView modelAndView) {		
 		SiteUser user = new SiteUser();
 		
 		modelAndView.getModel().put("user", user);

@@ -37,7 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 					"/verifyemail",
 					"/confirmregister",
 					"/invaliduser",
-					"/expiredtoken"
+					"/expiredtoken"					
 					)
 				.permitAll()
 				.antMatchers(
@@ -49,16 +49,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 					"/editstatus", 
 					"/deletestatus", 
 					"/viewstatus")
-				.hasRole("ADMIN")				
+				.hasRole("ADMIN")	
+				.antMatchers("/profile", 
+					"/edit-profile-about")
+					.authenticated()					
 				.anyRequest()
-					.authenticated()
+					.denyAll()
 					.and()
-				.formLogin()
-					.loginPage("/login")
-					.defaultSuccessUrl("/")
-					.permitAll()
-					.and()
-				.logout()
+//				.anyRequest()                    
+//					.authenticated()            
+//					.and()						  
+				.formLogin()                    
+					.loginPage("/login")  		
+					.defaultSuccessUrl("/")		 
+					.permitAll()				
+					.and()						
+				.logout()						
 					.permitAll();
 		
 		// @formatter:on

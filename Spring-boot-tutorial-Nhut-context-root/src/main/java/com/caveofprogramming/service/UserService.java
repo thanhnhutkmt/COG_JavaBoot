@@ -75,7 +75,10 @@ public class UserService implements UserDetailsService {
 	}
 
 	public SiteUser findByEmail(String email) {
-		// TODO Auto-generated method stub
 		return userDao.findByEmail(email);
+	}
+
+	public SiteUser get(String email) {
+		return userDao.findByEmail(email);				
 	}
 }
