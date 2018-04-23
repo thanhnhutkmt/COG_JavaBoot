@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartException;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -23,6 +25,13 @@ public class GlobalExceptionHandler {
 	
 	@Value("${message.error.duplicate.user}")
 	private String duplicationUserMessage;
+	
+	@ExceptionHandler(MultipartException.class)
+	@ResponseBody
+	String fileUploadHandler(Exception e) {
+		e.printStackTrace();
+		return "Error occurred uploading file.";
+	}
 	
 	@ExceptionHandler(value=Exception.class)
 	public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e) {

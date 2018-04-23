@@ -3,6 +3,9 @@
  */
 package com.caveofprogramming.model;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,6 +37,15 @@ public class Profile {
 	@Column(name="about", length=5000)
 	@Size(max=5000, message="{editprofile.about.size}")
 	private String about;
+	
+	@Column(name="photo.directory", length=10)
+	private String photoDirectory;
+	
+	@Column(name="photo.name", length=10)
+	private String photoName;
+	
+	@Column(name="photo.extension", length=5)
+	private String photoExtension;
 
 	public Long getId() {
 		return id;
@@ -72,5 +84,18 @@ public class Profile {
 		if (webProfile.about != null) {
 			this.about = htmlPolicy.sanitize(webProfile.about);
 		}
+	}
+	
+	public void setPhotoDetails(FileInfo photoInfo) {
+		photoDirectory = photoInfo.getSubDirectory();
+		photoExtension = photoInfo.getExtension();
+		photoName = photoInfo.getBasename();
+	}
+	
+	public Path getPhoto(String baseDirectory) {
+		if (photoName == null) {
+			return null;
+		}
+		return Paths.get(baseDirectory, photoDirectory, photoName + "." + photoExtension);
 	}
 }
