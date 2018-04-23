@@ -50,10 +50,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 					"/deletestatus", 
 					"/viewstatus")
 				.hasRole("ADMIN")	
-				.antMatchers("/profile", 
+				.antMatchers("/profile",
+					"/profile/*",
 					"/edit-profile-about",
 					"/upload-profile-photo",
-					"/profilePhoto")
+					"/profilePhoto",
+					"/profilePhoto/*"
+					)
 					.authenticated()					
 				.anyRequest()
 					.denyAll()

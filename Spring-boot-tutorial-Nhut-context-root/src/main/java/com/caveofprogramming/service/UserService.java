@@ -81,4 +81,8 @@ public class UserService implements UserDetailsService {
 	public SiteUser get(String email) {
 		return userDao.findByEmail(email);				
 	}
+
+	public SiteUser get(Long id) {
+		return userDao.findOne(id);
+	}
 }

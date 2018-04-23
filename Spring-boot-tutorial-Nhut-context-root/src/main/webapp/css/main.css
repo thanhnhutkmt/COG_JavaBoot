@@ -122,3 +122,15 @@ textarea {
 	position: absolute;
 	margin-top: 20px;	
 }
+
+#profile-photo-status {
+	position: absolute;
+	top: 5px;
+	left: 50px;
+	font-weight: bold;
+	color:green;
+}
+
+#photoUploadForm {
+	display: none
+}

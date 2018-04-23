@@ -15,7 +15,7 @@
 <title><tiles:insertAttribute name="title" /></title>
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-
+<script src="${contextRoot}/js/jquery.min.js" ></script>
 <link href="${contextRoot}/css/bootstrap.min.css" rel="stylesheet" />
 <link href="${contextRoot}/css/main.css" rel="stylesheet" />
 
@@ -74,7 +74,7 @@
 	<div class="container">
 		<tiles:insertAttribute name="content" />
 	</div>	
-	<script src="${contextRoot}/js/jquery.min.js"></script>
+	<%-- <script src="${contextRoot}/js/jquery.min.js"></script> --%>
  	<script src="${contextRoot}/js/bootstrap.min.js"></script>
  	
 <!-- TINYMCE editor with trial apikey --> 

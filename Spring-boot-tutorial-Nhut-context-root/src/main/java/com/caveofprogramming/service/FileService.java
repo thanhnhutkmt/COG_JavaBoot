@@ -104,8 +104,7 @@ public class FileService {
 //		g.drawImage(image, transform, null);		
 		
 		double scale = Math.max((double)width/image.getWidth(), (double)height/image.getHeight());
-		BufferedImage scaledImage = new BufferedImage((int)(scale * image.getWidth()), 
-				(int)(scale * image.getHeight()), image.getType());
+		BufferedImage scaledImage = new BufferedImage((int)(scale * image.getWidth()), (int)(scale * image.getHeight()), image.getType());
 		scaledImage.createGraphics().drawImage(image, AffineTransform.getScaleInstance(scale, scale), null);		
 		
 		return scaledImage.getSubimage(0, 0, width, height);		
