@@ -53,6 +53,17 @@ public class SiteUser {
 	@Size(min=5, max=15, message="{register.password.size}")
 	private String plainPassword;
 	
+	public SiteUser() {
+		
+	}
+	
+	public SiteUser(String email, String password) {
+		this.email = email;
+		this.plainPassword = password;
+		this.repeatPassword = password;
+		this.enabled = true;
+	}
+
 	@Column(name="role", length=20)
 	private String role;
 
@@ -113,4 +124,12 @@ public class SiteUser {
 	public void setRepeatPassword(String repeatPassword) {
 		this.repeatPassword = repeatPassword;
 	}
+
+	@Override
+	public String toString() {
+		return "SiteUser [id=" + id + ", email=" + email + ", password=" + password + ", repeatPassword="
+				+ repeatPassword + ", enabled=" + enabled + ", plainPassword=" + plainPassword + ", role=" + role + "]";
+	}
+	
+	
 }

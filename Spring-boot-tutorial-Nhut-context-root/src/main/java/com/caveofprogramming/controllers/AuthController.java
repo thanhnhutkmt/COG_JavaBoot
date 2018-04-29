@@ -116,7 +116,8 @@ public class AuthController {
 	ModelAndView register(ModelAndView modelAndView, 
 			@ModelAttribute(value="user") @Valid SiteUser user, BindingResult result) {			
 		modelAndView.setViewName("app.register");
-		if (!result.hasErrors()) {			
+		if (!result.hasErrors()) {		
+			user.setEnabled(true);
 			userService.register(user);
 			String token = userService.createEmailVerificationToken(user);
 			

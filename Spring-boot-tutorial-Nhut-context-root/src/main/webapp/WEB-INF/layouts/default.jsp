@@ -12,10 +12,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<meta name="_csrf" content="${_csrf.token}" />
+<meta name="_csrf_header" content="${_csrf.headerName}" />
+
 <title><tiles:insertAttribute name="title" /></title>
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-<script src="${contextRoot}/js/jquery.min.js" ></script>
+<script src="${contextRoot}/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 <link href="${contextRoot}/css/bootstrap.min.css" rel="stylesheet" />
 <link href="${contextRoot}/css/main.css" rel="stylesheet" />
 
@@ -75,8 +78,10 @@
 		<tiles:insertAttribute name="content" />
 	</div>	
 	<%-- <script src="${contextRoot}/js/jquery.min.js"></script> --%>
+ 	<script src="${contextRoot}/js/jquery-ui.min.js" ></script> 	
  	<script src="${contextRoot}/js/bootstrap.min.js"></script>
- 	
+	<script src="${contextRoot}/js/tag-it.js" type="text/javascript" charset="utf-8"></script>
+	 	
 <!-- TINYMCE editor with trial apikey --> 
   	<script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=wzaoq2ifu65zy8gk3xsnsvt3u0noskebsm763krln9eluvqn"></script>
 	<script>
@@ -142,6 +147,14 @@
 	<script type="text/javascript">
 	   bkLib.onDomLoaded(function() {new nicEditor({fullPanel : true}).panelInstance('nicEdit-textarea');});
 	</script>
-<!-- nicEditor editor --> 
+<!-- nicEditor editor -->
+ 
+<!-- tagit lib -->
+<script src="${contextRoot}/js/jquery-ui.min.js"></script>
+<script src="${contextRoot}/js/tag-it.min.js"></script>
+<link href='${contextRoot}/css/jquery.tagit.css' rel="stylesheet" type="text/css">
+<%-- <link href='${contextRoot}/css/tagit.ui-zendesk.css' rel="stylesheet" type="text/css"> --%>
+<!-- tagit lib -->
+
 </body>
 </html>

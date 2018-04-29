@@ -11,6 +11,6 @@ import org.springframework.stereotype.Repository;
  *
  */
 @Repository
-public interface ProfileDao extends CrudRepository<Profile, Long> {
-	Profile findByUser(SiteUser user);
+public interface InterestDao extends CrudRepository<Interest, String> {
+	Interest findOneByName(String name);
 }

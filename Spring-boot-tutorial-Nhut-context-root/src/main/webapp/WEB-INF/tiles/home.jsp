@@ -8,3 +8,18 @@
 		</div>
 	</div>
 </div>    
+
+<div class="row">
+	<div class="col-md-8 col-md-offset-2">
+		<form method="post">
+			<div class="input-group input-group-lg">
+				<input type="text" class="form-control" name="s" placeHolder="Search Hobbies"> 				
+				<span class="input-group-btn">
+					<button id="search-button" class="btn btn-primary" type="submit">
+						Find people						
+					</button>
+				</span>
+			</div>
+		</form>
+	</div>
+</div> 

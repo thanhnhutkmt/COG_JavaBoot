@@ -7,9 +7,26 @@
 <%-- <c:url var="img" value="/img" /> --%>
 <c:url var="editProfileAbout" value="/edit-profile-about" />
 <c:url var="profilephoto" value="/profilephoto/${userId}" />
+<c:url var="saveInterest" value="/save-interest" />
+<c:url var="deleteInterest" value="/delete-interest" />
 
 <div class="row">
 	<div class="col-md-10 col-md-offset-1">
+	
+	<div id="interestDiv">
+		<ul id="interestList">
+			<c:choose>
+				<c:when test="${empty profile.interests}">
+					<li>Add your interests here</li>
+				</c:when>
+				<c:otherwise>
+					<c:forEach var="interest" items="${profile.interests}">
+						<li>${interest}</li>
+					</c:forEach>
+				</c:otherwise>				
+			</c:choose>
+		</ul>	
+	</div>
 	
 	<div id="profile-photo-status"></div>
 	
@@ -36,9 +53,11 @@
 		</div>
 
 		<div class="profile-about-edit">
-			<%-- <a href="${editProfileAbout}">edit</a> --%>
-			<button class="btn btn-large btn-primary"
-				onclick="window.location.href='${editProfileAbout}'">Edit</button>
+			<c:if test="${ownProfile == true}">
+				<%-- <a href="${editProfileAbout}">edit</a> --%>
+				<button class="btn btn-large btn-primary"
+					onclick="window.location.href='${editProfileAbout}'">Edit</button>
+			</c:if>
 		</div>
 		
 		<div class="upload-form">				
@@ -83,8 +102,56 @@ function uploadPhoto(event) {
 	event.preventDefault();	
 }
 
+function saveInterest(text) {
+	editInterest(text, "${saveInterest}");	
+}
+
+function deleteInterest(text) {
+	editInterest(text, "${deleteInterest}");	
+}
+
+function editInterest(text, actionUrl) {
+	var token = $("meta[name='_csrf']").attr("content");
+	var header = $("meta[name='_csrf_header']").attr("content");
+	
+	/* alert(token + ": " + header); */
+	$.ajaxPrefilter(function(options, originalOptions, jqXHR) {
+		jqXHR.setRequestHeader(header, token);
+	});
+	
+	$.ajax({
+		'url': actionUrl,
+		data: {
+			'name': text
+		},
+		type: 'POST',
+		success: function() {
+			alert("Ok");
+		},
+		error: function() {
+			alert("error");
+		}
+	});
+}
+
 $(document).ready(function() {
 	console.log("Hello! Document loaded!");
+	
+	$('#interestList').tagit({		
+		afterTagRemoved: function(event, ui) {			
+			deleteInterest(ui.tagLabel);
+		},
+		afterTagAdded: function(event, ui) {
+			if(ui.duringInitialization != true) {
+				saveInterest(ui.tagLabel);
+			}			
+		},		
+		caseSensitive: false,
+		allowSpace: true,
+		tagLimit: 10,
+		readOnly: ${!ownProfile}
+	});
+	
 	$("#uploadLink").click(function(event) {
 		event.preventDefault();
 		$("#photoFileInput").trigger('click');
@@ -96,3 +163,6 @@ $(document).ready(function() {
 });
 
 </script>
+
+<!-- jquery min for tagit lib -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>

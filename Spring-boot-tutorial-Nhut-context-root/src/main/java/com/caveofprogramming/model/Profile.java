@@ -5,14 +5,19 @@ package com.caveofprogramming.model;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -46,6 +51,30 @@ public class Profile {
 	
 	@Column(name="photo.extension", length=5)
 	private String photoExtension;
+	
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(
+		name="profile_interests",
+		joinColumns={@JoinColumn(name="profile_id")},
+		inverseJoinColumns= {@JoinColumn(name="interest_id")})
+	@OrderColumn(name="display_order")
+	private Set<Interest> interests;	
+
+	public Profile() {
+		
+	}
+	
+	public Profile(SiteUser user) {
+		this.user = user;
+	}
+
+	public Set<Interest> getInterests() {
+		return interests;
+	}
+
+	public void setInterests(Set<Interest> interests) {
+		this.interests = interests;
+	}
 
 	public Long getId() {
 		return id;
@@ -75,15 +104,19 @@ public class Profile {
 		if (other.about != null) {
 			this.about = other.about;
 		}
+		
+		if (other.interests != null) {
+			this.interests = other.interests;
+		}
 	}
 
 	public void safeMergeFrom(Profile webProfile, PolicyFactory htmlPolicy) {		
-		String org = "<p>Hello, <b>World!</b></p><script>alert('hi');</script>";
-		System.out.println("origin : " + org + "\nSanitized : " + htmlPolicy.sanitize(org));  
+//		String org = "<p>Hello, <b>World!</b></p><script>alert('hi');</script>";
+//		System.out.println("origin : " + org + "\nSanitized : " + htmlPolicy.sanitize(org));  
 		
 		if (webProfile.about != null) {
 			this.about = htmlPolicy.sanitize(webProfile.about);
-		}
+		}		
 	}
 	
 	public void setPhotoDetails(FileInfo photoInfo) {
@@ -97,5 +130,13 @@ public class Profile {
 			return null;
 		}
 		return Paths.get(baseDirectory, photoDirectory, photoName + "." + photoExtension);
+	}
+
+	public void addInterest(Interest interest) {
+		interests.add(interest);
+	}
+
+	public void removeInterest(String interestName) {
+		interests.remove(new Interest(interestName));
 	}
 }

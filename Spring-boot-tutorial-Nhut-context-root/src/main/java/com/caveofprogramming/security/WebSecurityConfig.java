@@ -55,7 +55,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 					"/edit-profile-about",
 					"/upload-profile-photo",
 					"/profilePhoto",
-					"/profilePhoto/*"
+					"/profilePhoto/*",
+					"/save-interest",
+					"/delete-interest"
 					)
 					.authenticated()					
 				.anyRequest()
