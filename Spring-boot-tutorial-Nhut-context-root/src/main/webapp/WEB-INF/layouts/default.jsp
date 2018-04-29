@@ -153,7 +153,6 @@
 <script src="${contextRoot}/js/jquery-ui.min.js"></script>
 <script src="${contextRoot}/js/tag-it.min.js"></script>
 <link href='${contextRoot}/css/jquery.tagit.css' rel="stylesheet" type="text/css">
-<%-- <link href='${contextRoot}/css/tagit.ui-zendesk.css' rel="stylesheet" type="text/css"> --%>
 <!-- tagit lib -->
 
 </body>
