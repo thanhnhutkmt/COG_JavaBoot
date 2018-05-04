@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.caveofprogramming.model;
+package com.caveofprogramming.model.entity;
 
 /**
  * @author java_dev

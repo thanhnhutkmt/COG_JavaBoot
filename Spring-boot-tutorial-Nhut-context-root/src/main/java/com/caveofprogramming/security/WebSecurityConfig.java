@@ -32,12 +32,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 			.authorizeRequests()
 				.antMatchers("/", 
-					"/about", 
+					"/about",
+					"/search",
 					"/register", 
 					"/verifyemail",
 					"/confirmregister",
 					"/invaliduser",
-					"/expiredtoken"					
+					"/expiredtoken",
+					"/profilePhoto/*"
 					)
 				.permitAll()
 				.antMatchers(
@@ -54,8 +56,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 					"/profile/*",
 					"/edit-profile-about",
 					"/upload-profile-photo",
-					"/profilePhoto",
-					"/profilePhoto/*",
+					"/profilePhoto",					
 					"/save-interest",
 					"/delete-interest"
 					)

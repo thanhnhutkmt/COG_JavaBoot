@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import com.caveofprogramming.App;
-import com.caveofprogramming.model.UserDao;
+import com.caveofprogramming.model.repository.UserDao;
 import com.caveofprogramming.service.UserService;
 
 /**

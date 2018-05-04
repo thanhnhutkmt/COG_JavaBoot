@@ -6,7 +6,7 @@ package com.caveofprogramming.validation;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import com.caveofprogramming.model.SiteUser;
+import com.caveofprogramming.model.entity.SiteUser;
 
 /**
  * @author java_dev

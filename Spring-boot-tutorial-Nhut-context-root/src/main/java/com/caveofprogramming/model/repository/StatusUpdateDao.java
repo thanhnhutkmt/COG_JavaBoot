@@ -1,11 +1,13 @@
 /**
  * 
  */
-package com.caveofprogramming.model;
+package com.caveofprogramming.model.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
+
+import com.caveofprogramming.model.entity.StatusUpdate;
 
 /**
  * @author nhut

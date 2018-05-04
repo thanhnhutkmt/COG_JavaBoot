@@ -3,7 +3,6 @@
  */
 package com.caveofprogramming.controllers;
 
-import java.io.FileNotFoundException;
 import java.util.Date;
 
 import javax.validation.Valid;
@@ -18,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.caveofprogramming.model.SiteUser;
-import com.caveofprogramming.model.VerificationToken;
+import com.caveofprogramming.model.entity.SiteUser;
+import com.caveofprogramming.model.entity.VerificationToken;
 import com.caveofprogramming.service.EmailService;
 import com.caveofprogramming.service.UserService;
 
@@ -117,7 +116,7 @@ public class AuthController {
 			@ModelAttribute(value="user") @Valid SiteUser user, BindingResult result) {			
 		modelAndView.setViewName("app.register");
 		if (!result.hasErrors()) {		
-			user.setEnabled(true);
+//			user.setEnabled(true);
 			userService.register(user);
 			String token = userService.createEmailVerificationToken(user);
 			

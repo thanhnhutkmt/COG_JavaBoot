@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.caveofprogramming.model;
+package com.caveofprogramming.model.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +12,7 @@ import javax.persistence.MapKey;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
@@ -48,6 +49,16 @@ public class SiteUser {
 	
 	@Column(name="enabled")
 	private Boolean enabled = false;
+	
+	@NotNull
+	@Column(name="firstname")
+	@Size(min=5, max=25, message="{register.firstname.size}")
+	private String firstname;
+	
+	@NotNull
+	@Column(name="surname")
+	@Size(min=5, max=25, message="{register.surname.size}")
+	private String surname;
 
 	@Transient
 	@Size(min=5, max=15, message="{register.password.size}")
@@ -57,11 +68,13 @@ public class SiteUser {
 		
 	}
 	
-	public SiteUser(String email, String password) {
+	public SiteUser(String email, String password, String firstname, String surname) {
 		this.email = email;
-		this.plainPassword = password;
+		this.setPlainPassword(password);
 		this.repeatPassword = password;
 		this.enabled = true;
+		this.firstname = firstname;
+		this.surname = surname;
 	}
 
 	@Column(name="role", length=20)
@@ -124,12 +137,28 @@ public class SiteUser {
 	public void setRepeatPassword(String repeatPassword) {
 		this.repeatPassword = repeatPassword;
 	}
+	
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getSurname() {
+		return surname;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
 
 	@Override
 	public String toString() {
 		return "SiteUser [id=" + id + ", email=" + email + ", password=" + password + ", repeatPassword="
-				+ repeatPassword + ", enabled=" + enabled + ", plainPassword=" + plainPassword + ", role=" + role + "]";
+				+ repeatPassword + ", enabled=" + enabled + ", firstname=" + firstname + ", surname=" + surname
+				+ ", plainPassword=" + plainPassword + ", role=" + role + "]";
 	}
-	
 	
 }

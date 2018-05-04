@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.caveofprogramming.model;
+package com.caveofprogramming.model.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

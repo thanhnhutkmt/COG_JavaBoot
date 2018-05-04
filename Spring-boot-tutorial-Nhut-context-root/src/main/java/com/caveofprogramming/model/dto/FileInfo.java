@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.caveofprogramming.model;
+package com.caveofprogramming.model.dto;
 
 /**
  * @author java_dev
