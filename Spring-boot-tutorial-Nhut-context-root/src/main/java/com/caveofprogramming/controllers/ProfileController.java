@@ -234,8 +234,6 @@ public class ProfileController {
 	@RequestMapping(value="/save-interest", method=RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<?> saveInterest(@RequestParam("name") String interestName) {
-//		System.out.println("Save interest");
-		
 		SiteUser user = getUser();
 		Profile profile = profileService.getUserProfile(user);
 		

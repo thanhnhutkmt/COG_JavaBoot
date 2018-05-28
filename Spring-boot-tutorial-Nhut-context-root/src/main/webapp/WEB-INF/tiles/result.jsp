@@ -42,7 +42,7 @@ You searched on: ${s}
 			<div class="results-interests">
 				<c:forEach var="interest" items="${result.interests}" varStatus="status">
 					<c:url var="interestLink" value="/search?s=${interest}" />
-					<a href="${interestLink}"><c:out value="${interest}" /></a>	
+					<a href="${interestLink}">${interest}</a>	
 					<c:if test="${!status.last}"> | </c:if>
 				</c:forEach>
 			</div>
